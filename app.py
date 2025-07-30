@@ -1,38 +1,40 @@
-from flask import Flask, jsonify
-from flask_mysqldb import MySQL
+
+from flask import Flask, render_template, request, redirect
+import mysql.connector
+
+# ✅ Define app before any @app.route
 app = Flask(__name__)
 
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'roottoor'
-app.config['MYSQL_DB'] = 'aditya_cse'
+# ✅ MySQL connection
+db = mysql.connector.connect(
+    host="localhost",
+    user="root",
+    password="roottoor",  # Replace if needed
+    database="demo"
+)
 
-mysql = MySQL(app)
-
-
+# ✅ Routes
 @app.route('/')
-def hello_world():
-    return 'Hello, aditya'
+def index():
+    return render_template('home.html')
 
-# @app.route('/007')
-# def myname():
-#     return 'My name is aditya'
+@app.route('/submit', methods=['POST'])
+def submit():
+    if request.method == 'POST':
+        user_id = request.form['id']
+        name = request.form['name']
+        email = request.form['email']
+        password = request.form['password']
 
-@app.route('/myname/<name>')
-def myname(name):
-    return jsonify({"message":"hello","name":name})
+        cursor = db.cursor()
+        query = "INSERT INTO user (id, name, email, password) VALUES (%s, %s, %s, %s)"
+        values = (user_id, name, email, password)
+        cursor.execute(query, values)
+        db.commit()
+        cursor.close()
 
+        return redirect('/')
 
-@app.route('/getData')
-def getData():
-    cur = mysql.connection.cursor()
-    cur.execute("SELECT * FROM user")
-    result = cur.fetchall()
-    cur.close()
-    return jsonify(result)
-
-
+# ✅ Run the app
 if __name__ == '__main__':
-    app.run()
-
-
+    app.run(debug=True)

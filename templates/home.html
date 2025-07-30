@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Registration Form</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(120deg, #89f7fe, #66a6ff);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      width: 350px;
+      padding: 20px;
+      background-color: white;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form h2 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    label {
+      margin-top: 10px;
+      font-weight: 600;
+      color: #444;
+    }
+
+    input {
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 14px;
+      transition: 0.3s ease-in-out;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #66a6ff;
+      box-shadow: 0 0 5px #66a6ff;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 12px;
+      background-color: #66a6ff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s ease-in-out;
+    }
+
+    button:hover {
+      background-color: #558de8;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <form action="/submit" method="post">
+      <input type="text" name="id" placeholder="ID"><br>
+      <input type="text" name="name" placeholder="Name"><br>
+      <input type="email" name="email" placeholder="Email"><br>
+      <input type="password" name="password" placeholder="Password"><br>
+      <input type="submit" value="Submit">
+  </form>
+  
+    
+  </div>
+</body>
+</html>
